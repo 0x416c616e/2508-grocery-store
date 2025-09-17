@@ -21,12 +21,18 @@ const inventory = [
 
 // === Complete the functions below! ===
 
+let debugMode = false;
+
 /**
  * Prints out the name of each item in the given array.
  * @param {Item[]} items - array of items
  */
 function logNames(items) {
-  // TODO: use `forEach`
+  if (debugMode) console.log("beginning of logNames");
+  inventory.forEach((item) => {
+    console.log(item.name);
+  });
+  if (debugMode) console.log("end of logNames");
 }
 
 /**
@@ -34,7 +40,16 @@ function logNames(items) {
  * @returns {string[]} an array of item names in all uppercase
  */
 function getUppercaseNames(items) {
-  // TODO: use `map`
+  if (debugMode) console.log("beginning of getUppercaseNames");
+  // use `map`
+  let names = items.map((item) => {
+    if (debugMode) {
+      console.log("item: " + JSON.stringify(item));
+    }
+    return item.name.toUpperCase();
+  });
+  if (debugMode) console.log("end of getUppercaseNames");
+  return names;
 }
 
 /**
@@ -43,7 +58,17 @@ function getUppercaseNames(items) {
  * @returns {Item} - the item in `items` with the given `id`
  */
 function getItemById(items, id) {
-  // TODO: use `find`
+  let item = null;
+  if (debugMode) console.log("beginning of getItemById");
+  // use `find`
+  item = items.find((item) => {
+    if (debugMode) {
+      console.log("item: " + JSON.stringify(item));
+    }
+    return item.id === id;
+  });
+  if (debugMode) console.log("end of getItemById");
+  return item;
 }
 
 /**
@@ -52,7 +77,19 @@ function getItemById(items, id) {
  * @returns {number} the price of the item named `name` if found
  */
 function getItemPriceByName(items, name) {
-  // TODO: use a loop!
+  if (debugMode) console.log("beginning of getItemPriceByName");
+  // use a loop!
+  let itemPrice = null;
+  for (let i = 0; i < items.length; i++) {
+    if (items[i].name === name) {
+      itemPrice = items[i].price;
+      if (debugMode) {
+        console.log("item: " + JSON.stringify(item));
+      }
+    }
+  }
+  if (debugMode) console.log("end of getItemPriceByName");
+  return itemPrice;
 }
 
 /**
@@ -61,7 +98,16 @@ function getItemPriceByName(items, name) {
  * @returns {Item[]} array of items that belong to the given `category`
  */
 function getItemsByCategory(items, category) {
-  // TODO: use `filter`
+  if (debugMode) console.log("beginning of getItemsByCategory");
+  // use `filter`
+  items = items.filter((item) => {
+    if (debugMode) {
+      console.log("item: " + JSON.stringify(item));
+    }
+    return item.category === category;
+  });
+  if (debugMode) console.log("end of getItemsByCategory");
+  return items;
 }
 
 /**
@@ -69,7 +115,20 @@ function getItemsByCategory(items, category) {
  * @returns {number} the total quantity of all items
  */
 function countItems(items) {
-  // TODO: use `reduce`
+  if (debugMode) console.log("beginning of countItems");
+  // use `reduce`
+  let total = items.reduce((total, current) => {
+    if (current !== null && current !== undefined) {
+      total++;
+    }
+    if (debugMode) {
+      console.log("current: " + JSON.stringify(current));
+      console.log("total: " + total);
+    }
+    return total;
+  }, 0);
+  if (debugMode) console.log("end of countItems");
+  return total;
 }
 
 /**
@@ -77,7 +136,27 @@ function countItems(items) {
  * @returns {number} the cost of all given items
  */
 function getTotalPrice(items) {
+  if (debugMode) console.log("beginning of getTotalPrice");
   // TODO: use `reduce`
+  let total = items.reduce((total, current) => {
+    if (
+      current !== null &&
+      current !== undefined &&
+      current.price !== null &&
+      current.price !== undefined &&
+      current.quantity !== null &&
+      current.quantity !== undefined
+    ) {
+      total += current.price * current.quantity;
+      if (debugMode) {
+        console.log("current: " + JSON.stringify(current));
+        console.log("total: " + total);
+      }
+    }
+    return total;
+  }, 0);
+  if (debugMode) console.log("end of getTotalPrice");
+  return total;
 }
 
 // === READ BUT DO NOT CHANGE THE CODE BELOW ===
